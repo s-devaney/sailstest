@@ -1,0 +1,12 @@
+{
+  "name": "sailstest",
+  "version": "0.0.0",
+  "authors": [
+    "Sam <sam@concept96.co.uk>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "backbone": "~1.2.3",
+    "jquery": "components/jquery#~2.1.4"
+  }
+}
