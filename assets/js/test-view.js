@@ -1,3 +1,5 @@
+window.testViewObject, window.userObject = null;
+
 var testViewClass = Backbone.View.extend({
 	initialize: function() {
 		console.log("test view created");
@@ -5,8 +7,10 @@ var testViewClass = Backbone.View.extend({
 	},
 
 	render: function() {
-		var template = _.template($("#test-template"), {});
-		this.$el.html(template);
+		console.log('rendering view...');
+		var variables = {username_var: window.userObject.get("username") };
+		var template = _.template($("#test-template").html());
+		this.$el.html(template(variables));
 	},
 
 	events: {
@@ -15,10 +19,14 @@ var testViewClass = Backbone.View.extend({
 
 	doSubmit: function() {
 		console.log("submitting...");
-		
+		window.userObject.set({username: $("#test_username").val()});
 	}
 });
 
-var testViewObject = new testViewClass({
-	el: $("test-view")
+$(function() {
+	window.userObject = new userClass();
+
+	window.testViewObject = new testViewClass({
+		el: $("#test-view")
+	});
 });
