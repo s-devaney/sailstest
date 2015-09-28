@@ -24,15 +24,21 @@
 	</head>
 	<body>
 		<!-- load templates -->
-		<script type="text/template" id="user-template">
-			<h1>Welcome, <%= user.get("username") %> <a href="javascript:void(0);">delete</a></h1>
+		<script type="text/template" id="login-template">
+			<h1>Login</h1>
+			<input type="text" id="email" /><br />
+			<input type="password" id="password" /><br />
 		</script>
-		<script type="text/template" id="user-form-template">
-			<h1>Create a user</h1>
-			<input type="text" id="test_username" /><br />
-			<input type="button" id="test_button" value="Submit" /><br />
+		<script type="text/template" id="employee-view-template">
+			<h1><%= employee.get("name") %> <a href="javascript:void(0);">delete</a></h1>
 		</script>
-		<div id="user-form-view"></div>
-		<div id="user-view"></div>
+		<script type="text/template" id="employee-form-template">
+			<h1>Create an employee</h1>
+			<input type="text" id="employee_name" /><br />
+			<input type="button" id="employee_button" value="Submit" /><br />
+		</script>
+		<div id="login-form-view"></div>
+		<div id="employee-form-view"></div>
+		<div id="employee-view"></div>
 	</body>
 </html>
