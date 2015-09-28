@@ -26,26 +26,44 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  "*": true
+  "*": [
+    "basicAuth",
+    "passport",
+    "sessionAuth",
+    "ModelPolicy",
+    "AuditPolicy",
+    "OwnerPolicy",
+    "PermissionPolicy",
+    "RolePolicy",
+    "CriteriaPolicy"
+  ],
+
+  AuthController: {
+    "*": ["passport"]
+  },
+
+  UserController: {
+    "create": true
+  }
   
   /***************************************************************************
   *                                                                          *
-  * Here's an example of mapping some policies to run before a controller    *
+  * Here"s an example of mapping some policies to run before a controller    *
   * and its actions                                                          *
   *                                                                          *
   ***************************************************************************/
 	// RabbitController: {
 
-		// Apply the `false` policy as the default for all of RabbitController's actions
+		// Apply the `false` policy as the default for all of RabbitController"s actions
 		// (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
-		// '*': false,
+		// "*": false,
 
-		// For the action `nurture`, apply the 'isRabbitMother' policy
+		// For the action `nurture`, apply the "isRabbitMother" policy
 		// (this overrides `false` above)
-		// nurture	: 'isRabbitMother',
+		// nurture	: "isRabbitMother",
 
 		// Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
 		// before letting any users feed our rabbits
-		// feed : ['isNiceToAnimals', 'hasRabbitFood']
+		// feed : ["isNiceToAnimals", "hasRabbitFood"]
 	// }
 };

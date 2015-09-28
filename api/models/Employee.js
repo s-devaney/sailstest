@@ -6,19 +6,18 @@
 */
 
 module.exports = {
-	migrate: "drop",
 	scheme: true,
-	connection: "mongodb",
 	autoPK: true,
 	autoCreatedAt: false,
 	autoUpdatedAt: false,
+
 	attributes: {
 		name: {
 			type: "string",
 			string: true,
 			required: true,
 			maxLength: 128,
-			empty: false
+			minLength: 3
 		}
 	}
 };

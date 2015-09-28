@@ -15,19 +15,22 @@
 		<script src="js/app/bootload.js"></script>
 		<!-- load views -->
 		<script src="js/views/user-form.js"></script>
-		<script src="js/views/users.js"></script>
-		<script src="js/views/user.js"></script>
+		<script src="js/views/employee-form.js"></script>
+		<script src="js/views/employees.js"></script>
+		<script src="js/views/employee.js"></script>
 		<!-- load models -->
 		<script src="js/models/user.js"></script>
+		<script src="js/models/employee.js"></script>
 		<!-- load collections -->
-		<script src="js/collections/users.js"></script>
+		<script src="js/collections/employees.js"></script>
 	</head>
 	<body>
 		<!-- load templates -->
 		<script type="text/template" id="login-template">
 			<h1>Login</h1>
-			<input type="text" id="email" /><br />
+			<input type="text" id="identifier" /><br />
 			<input type="password" id="password" /><br />
+			<input type="button" id="login_button" value="Login" /><br />
 		</script>
 		<script type="text/template" id="employee-view-template">
 			<h1><%= employee.get("name") %> <a href="javascript:void(0);">delete</a></h1>
@@ -38,7 +41,5 @@
 			<input type="button" id="employee_button" value="Submit" /><br />
 		</script>
 		<div id="login-form-view"></div>
-		<div id="employee-form-view"></div>
-		<div id="employee-view"></div>
 	</body>
 </html>

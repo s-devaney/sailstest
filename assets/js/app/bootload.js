@@ -1,14 +1,18 @@
+var user;
+
 $(function() {
-	users = new usersCollection();
-	users.fetch();
-
-	userForm = new userFormView({
-		el: $("#user-form-view")
+	//create user model
+	user = new User();
+	user.fetch({
+		success: function(m, r, o) {
+			console.log("user is logged in (I think...)");
+			console.log(r);
+			app.initialize();
+		}, error: function(m, r, o) {
+			console.log("user is not logged in or there was an error");
+			console.log(r);
+			app.initialize();
+		}
 	});
 
-	usersView = new usersView({
-		collection: users
-	});
-
-	$(document.body).append(usersView.render().el);
 });

@@ -3,10 +3,10 @@ var userModel = Backbone.Model.extend({
 		console.log('initializing user');
 	},
 
-	urlRoot: '/user',
+	urlRoot: '/user/me'
 
 	defaults: {
-		username: 'Default'
+		loggedIn: false
 	}
 });
 
