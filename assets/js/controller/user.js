@@ -6,8 +6,7 @@ define([
 	"controller/register"
 ], function(_, Backbone, UserModel, LoginController, RegisterController) {
 	var UserController = function() {
-		var model = null,
-		var controller = null,
+		var model, controller;
 
 		var initialize = function() {
 			//initialize model
@@ -50,18 +49,18 @@ define([
 					}
 				}
 			}
-		}
+		};
 
 		var isLoggedIn = function() {
 			return this.model.get("loggedIn");
 		};
 
-		var onTokenChange: function(newToken) {
+		var onTokenChange = function(newToken) {
 			//update localStorage
 			localStorage.setItem("user_token", newToken);
 		};
 
-		var onLoggedInChange: function(loggedIn) {
+		var onLoggedInChange = function(loggedIn) {
 			this.trigger("controller.user.logged_in_change", loggedIn)
 		};
 	};
@@ -72,7 +71,5 @@ define([
 		}
 	});
 
-	var user_controller = new UserController();
-
-	return user_controller;
+	return new UserController();
 });

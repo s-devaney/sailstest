@@ -10,7 +10,7 @@ define([
 		},
 
 		initialize: function() {
-			this.listenTo(UserController, "controller.user.logged_in_change", app_router.handleLoggedInChange)
+			this.listenTo(UserController, "controller.user.logged_in_change", this.handleLoggedInChange)
 			Backbone.history.start();
 		},
 

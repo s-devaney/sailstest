@@ -2,9 +2,9 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"text!template/register/form.html"
+	"text!/template/register/form.html"
 ], function($, _, Backbone, RegisterFormTemplate) {
-	var EmployeeFormView = new Backbone.View.extend({
+	var RegisterFormView = new Backbone.View.extend({
 		el: $("#register-form-view"),
 
 		render: function() {
@@ -15,7 +15,7 @@ define([
 		},
 
 		events: {
-			"click input[type=button]": doRegister
+			"click input[type=button]": this.doRegister
 		},
 
 		doRegister: function() {
@@ -26,5 +26,5 @@ define([
 		// TODO - form logic
 	});
 
-	return RegisterViewForm;
+	return RegisterFormView;
 });

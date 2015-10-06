@@ -2,7 +2,7 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"text!template/login/form.html"
+	"text!/template/login/form.html"
 ], function($, _, Backbone, LoginFormTemplate) {
 	var LoginFormView = new Backbone.View.extend({
 		el: $("#login-form-view"),
@@ -15,7 +15,7 @@ define([
 		},
 
 		events: {
-			"click input[type=button]": doLogin
+			"click input[type=button]": this.doLogin
 		},
 
 		doLogin: function() {
