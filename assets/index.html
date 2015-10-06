@@ -1,47 +1,12 @@
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Sails test</title>
-		<link rel="stylesheet" href="css/style.css">
-		<!-- load dependencies -->
-		<!-- Underscore, Backbone, jQuery -->
-		<script src="js/dependencies/jquery.min.js"></script>
-		<script src="js/dependencies/underscore-min.js"></script>
-		<script src="js/dependencies/backbone-min.js"></script>
-		<!-- load bootloader -->
-		<script src="js/app/bootload.js"></script>
-		<!-- load models -->
-		<script src="js/models/user.js"></script>
-		<script src="js/models/employee.js"></script>
-		<!-- load collections -->
-		<script src="js/collections/employees.js"></script>
-		<!-- load views -->
-		<script src="js/views/user-form.js"></script>
-		<script src="js/views/employee-form.js"></script>
-		<script src="js/views/employees.js"></script>
-		<script src="js/views/employee.js"></script>
-		<!-- load routes -->
-		<script src="js/router/router.js"></script>
+		<script data-main="js/main" src="js/lib/require/require.js"></script>
 	</head>
 	<body>
-		<!-- load templates -->
-		<script type="text/template" id="login-template">
-			<h1>Login</h1>
-			<input type="text" id="identifier" /><br />
-			<input type="password" id="password" /><br />
-			<input type="button" id="login_button" value="Login" /><br />
-		</script>
-		<script type="text/template" id="employee-view-template">
-			<h1><%= employee.get("name") %> <a href="javascript:void(0);">delete</a></h1>
-		</script>
-		<script type="text/template" id="employee-form-template">
-			<h1>Create an employee</h1>
-			<input type="text" id="employee_name" /><br />
-			<input type="button" id="employee_button" value="Submit" /><br />
-		</script>
-		<!-- end templates -->
 	</body>
 </html>

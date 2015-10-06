@@ -1,3 +1,20 @@
+define([
+	"jquery",
+	"underscore",
+	"backbone",
+	"text!templates/login/form"
+], function($, _, Backbone, LoginFormTemplate) {
+	var LoginFormView = new Backbone.View.extend({
+		el: '',
+		render: function() {
+			var data, template;
+
+		}
+	})
+});
+
+
+
 var userFormView = Backbone.View.extend({
 	initialize: function() {
 		console.log("user-form view created");
