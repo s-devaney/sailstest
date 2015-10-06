@@ -1,3 +1,26 @@
+define([
+	"jquery",
+	"underscore",
+	"backbone",
+	"text!template/employee/form"
+], function($, _, Backbone, EmployeeFormTemplate) {
+	var EmployeeFormView = new Backbone.View.extend({
+		el: $("#employee-form-view"),
+
+		render: function() {
+			console.log("rendering employee-form view");
+			var data, template;
+			template = _.template(EmployeeFormTemplate);
+			this.$el.append(template);
+		}
+
+		// TODO - form logic
+	});
+
+	return EmployeeViewForm;
+});
+
+/*
 var employeeFormView = Backbone.View.extend({
 	initialize: function() {
 		console.log("employee-form view created");
@@ -37,3 +60,4 @@ var employeeFormView = Backbone.View.extend({
 		});
 	}
 });
+*/

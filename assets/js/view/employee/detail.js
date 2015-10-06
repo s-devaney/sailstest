@@ -1,3 +1,24 @@
+define([
+	"jquery",
+	"underscore",
+	"backbone",
+	"text!template/employee/detail"
+], function($, _, Backbone, EmployeeDetailTemplate) {
+	var EmployeeDetailView = new Backbone.View.extend({
+		el: $('#employee-detail-view'),
+
+		render: function() {
+			console.log("rendering employee-detail view");
+			var data, template;
+			template = _.template(EmployeeDetailTemplate);
+			this.$el.append(template);
+		}
+	});
+
+	return EmployeeDetailView;
+});
+
+/*
 var userView = Backbone.View.extend({
 	tagName: 'div',
 
@@ -25,3 +46,4 @@ var userView = Backbone.View.extend({
 		this.model.destroy();
 	}
 });
+*/

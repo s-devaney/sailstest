@@ -2,19 +2,25 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"text!templates/login/form"
+	"text!template/login/form"
 ], function($, _, Backbone, LoginFormTemplate) {
 	var LoginFormView = new Backbone.View.extend({
-		el: '',
-		render: function() {
-			var data, template;
+		el: $("#login-form-view"),
 
+		render: function() {
+			console.log("rendering login-form view");
+			var data, template;
+			template = _.template(LoginFormTemplate);
+			this.$el.append(template);
 		}
-	})
+
+		// TODO - form logic
+	});
+
+	return LoginFormView;
 });
 
-
-
+/*
 var userFormView = Backbone.View.extend({
 	initialize: function() {
 		console.log("user-form view created");
@@ -51,3 +57,4 @@ var userFormView = Backbone.View.extend({
 		});
 	}
 });
+*/
