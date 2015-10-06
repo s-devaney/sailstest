@@ -2,13 +2,17 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
+	"controller/user"
 	"router"
-], function($, _, Backbone, Router) {
-	var initialize = function() {
-		Router.initialize();
-	};
+], function($, _, Backbone, UserController, Router) {
+	var App = function() {
+		var initialize = function() {
+			//initialize user controller
+			UserController.initialize();
+		};
+	}
 
-	return {
-		initialize: initialize
-	};
+	var app = new App();
+
+	return app;
 });

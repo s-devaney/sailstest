@@ -2,7 +2,7 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"text!template/employee/form"
+	"text!template/employee/form.html"
 ], function($, _, Backbone, EmployeeFormTemplate) {
 	var EmployeeFormView = new Backbone.View.extend({
 		el: $("#employee-form-view"),

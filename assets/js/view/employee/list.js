@@ -2,10 +2,22 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"text!template/employee/list"
-], function($, _, Backbone, EmployeeListTemplate) {
+	"collection/employees",
+	"text!template/employee/list.html"
+], function($, _, Backbone, EmployeeCollection, EmployeeListTemplate) {
 	var EmployeeListView = new Backbone.View.extend({
 		el: $("#employee-list-view"),
+
+		initialize: function() {
+			this.collection = new EmployeeCollection();
+			this.fetch(success: function() {
+				console.log("successfully fetched employee collection");
+				this.render();
+			}, error: function(collection, response, options) {
+				console.log("error fetching employee collection: " + JSON.stringify(response));
+				this.render();
+			});
+		},
 
 		render: function() {
 			console.log("rendering employee-list view");

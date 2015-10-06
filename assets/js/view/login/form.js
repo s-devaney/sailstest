@@ -2,7 +2,7 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"text!template/login/form"
+	"text!template/login/form.html"
 ], function($, _, Backbone, LoginFormTemplate) {
 	var LoginFormView = new Backbone.View.extend({
 		el: $("#login-form-view"),
@@ -12,6 +12,15 @@ define([
 			var data, template;
 			template = _.template(LoginFormTemplate);
 			this.$el.append(template);
+		},
+
+		events: {
+			"click input[type=button]": doLogin
+		},
+
+		doLogin: function() {
+			console.log("login button clicked");
+			this.trigger("view.login.form.submitted");
 		}
 
 		// TODO - form logic
@@ -19,42 +28,3 @@ define([
 
 	return LoginFormView;
 });
-
-/*
-var userFormView = Backbone.View.extend({
-	initialize: function() {
-		console.log("user-form view created");
-		this.render();
-	},
-
-	render: function() {
-		console.log('rendering employee-form view...');
-		var template = _.template($("#user-form-template").html());
-		this.$el.html(template);
-	},
-
-	events: {
-		"click input[type=button]": "doLogin"
-	},
-
-	doLogin: function() {
-		console.log("attempting login...");
-		user.set({
-			identifier: $("#identifier").val(),
-			password: $("#password").val()
-		});
-		user.save("identifier", "password", {
-			success: function(model, response, options) {
-				console.log("logn success (I think)...");
-				console.log(response);
-				console.log(model);
-				user.fetch();
-				user.set({"loggedIn": true});
-			},
-			error: function() {
-				console.log("save error");
-			}
-		});
-	}
-});
-*/

@@ -1,7 +1,14 @@
-var employeeModel = Backbone.Model.extend({
-	initialize: function() {
-		console.log('initializing employee');
-	},
+define([
+	"underscore",
+	"backbone"
+], function(_, Backbone) {
+	var EmployeeModel = Backbone.Model.extend({
+		urlRoot: "/employee",
 
-	urlRoot: '/employee'
+		initialize: function() {
+			console.log("initializing employee model");
+		}
+	});
+
+	return EmployeeModel;
 });
