@@ -9,10 +9,16 @@ module.exports = {
 	/**
 	* Hash the password field of the passed user.
 	*/
-	hashPassword: function (user, callback, next) {
+	hashPassword: function (user, next) {
+		sails.log.silly("hashing password for user: " + JSON.stringify(user));
 		if (user.password) {
 			//user.password = bcrypt.hashSync(user.password);
-			credential.hash(user.password, callback);
+			credential.hash(user.password, function(err, hash) {
+				sails.log.silly("password hashing complete ("+typeof hash+"). Hash: " + hash);
+				user.password = hash;
+				sails.log.silly("hashing complete. Updating user password for user: " + JSON.stringify(user));
+				next();
+			});
 		}
 	},
 
@@ -20,9 +26,9 @@ module.exports = {
 	* Compare user password hash with unhashed password
 	* @returns boolean indicating a match
 	*/
-	comparePassword: function(password, user, callback, next){
+	comparePassword: function(pwhash, inputpw, callback){
 		//return bcrypt.compareSync(password, user.password);
-		credential.verify(user.password, password, function(next) {callback(next);});
+		credential.verify(pwhash, inputpw, callback);
 	},
  
 	/**
@@ -36,7 +42,7 @@ module.exports = {
 			sails.config.jwtSettings.secret,
 			{
 				algorithm: sails.config.jwtSettings.algorithm,
-				expiresInMinutes: sails.config.jwtSettings.expiresInMinutes,
+				expiresIn: sails.config.jwtSettings.expiresInSeconds,
 				issuer: sails.config.jwtSettings.issuer,
 				audience: sails.config.jwtSettings.audience
 			}
