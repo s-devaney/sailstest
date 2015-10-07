@@ -6,30 +6,31 @@ define([
 	"controller/register"
 ], function(_, Backbone, UserModel, LoginController, RegisterController) {
 	var UserController = function() {
-		var model, controller;
-
-		var initialize = function() {
+		this.initialize = function() {
 			//initialize model
 			this.model = new UserModel();
 
 			//subscribe to initial events
 			this.listenTo(this.model, "change:loggedIn", this.onLoggedInChange);
 
-			//get initial login state
+			//subscribe to other events
+			this.listenTo(this.model, "change:token", this.onTokenChange);
+			this.listenTo(LoginController, "controller.login.submitted", this.controllerHandler.login_controller.submitted);
+			this.listenTo(RegisterController, "controller.register.submitted", this.controllerHandler.register_controller.submitted);
+		};
+
+		this.setInitialLoggedInState = function() {
 			if(localStorage.getItem("user-token")) {
+				console.log("user is logged in");
 				//this won't fire the onTokenChange event as we haven't subscribed to it yet
 				this.model.set({token: token, loggedIn: true});
 			} else {
+				console.log("user is not logged in");
 				this.model.set({loggedIn: false});
 			}
-
-			//subscribe to other events
-			this.listenTo(this.model, "change:token", this.onTokenChange);
-			this.listenTo(LoginController, "controller.login.submitted", this.contorllerHandler.login_controller.submitted);
-			this.listenTo(RegisterController, "controller.register.submitted", this.contorllerHandler.register_controller.submitted);
 		};
 
-		var controllerHandler = {
+		this.controllerHandler = {
 			login_controller: {
 				submitted: function(result) {
 					//handle login form result
@@ -51,17 +52,18 @@ define([
 			}
 		};
 
-		var isLoggedIn = function() {
+		this.isLoggedIn = function() {
 			return this.model.get("loggedIn");
 		};
 
-		var onTokenChange = function(newToken) {
+		this.onTokenChange = function(event) {
 			//update localStorage
-			localStorage.setItem("user_token", newToken);
+			localStorage.setItem("user_token", event.changed.token);
 		};
 
-		var onLoggedInChange = function(loggedIn) {
-			this.trigger("controller.user.logged_in_change", loggedIn)
+		this.onLoggedInChange = function(event) {
+			console.log("logged in state change");
+			this.trigger("controller.user.logged_in_change", event.changed.loggedIn)
 		};
 	};
 
@@ -71,5 +73,8 @@ define([
 		}
 	});
 
-	return new UserController();
+	var user_controller = new UserController();
+	user_controller.initialize();
+
+	return user_controller;
 });

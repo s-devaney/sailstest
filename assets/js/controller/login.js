@@ -5,11 +5,15 @@ define([
 	"view/login/form"
 ], function(_, Backbone, AppRouter, LoginFormView) {
 	var LoginController = function() {
-		var initialize = function() {
+		this.initialize = function() {
+			console.log("initializing login controller");
+			console.log(AppRouter);
 			this.listenTo(AppRouter, "router.route_changed", this.onRouteChanged)
 		};
 
-		var onRouteChanged = function(route) {
+		this.onRouteChanged = function(route) {
+			console.log("login controller: route change detected");
+			console.log(route);
 			if(route === "login") {
 				this.view = new LoginFormView();
 				this.listenTo(this.view, "view.login.form.submitted", this.viewHandler.submitted);
@@ -18,7 +22,7 @@ define([
 			}
 		};
 
-		viewHandler = {
+		this.viewHandler = {
 			submitted: function() {
 				//submit form logic
 
@@ -28,7 +32,15 @@ define([
 		}
 	};
 
+	_.extend(LoginController.prototype, Backbone.Events, {
+		remove: function() {
+			this.stopListening();
+		}
+	});
+
 	var login_controller = new LoginController();
+	login_controller.initialize();
 
 	return login_controller;
+
 });
