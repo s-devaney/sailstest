@@ -1,14 +1,11 @@
 define([
 	"underscore",
 	"backbone",
-	"router",
 	"view/login/form"
 ], function(_, Backbone, AppRouter, LoginFormView) {
 	var LoginController = function() {
 		this.initialize = function() {
 			console.log("initializing login controller");
-			console.log(AppRouter);
-			this.listenTo(AppRouter, "router.route_changed", this.onRouteChanged)
 		};
 
 		this.onRouteChanged = function(route) {
@@ -33,14 +30,12 @@ define([
 	};
 
 	_.extend(LoginController.prototype, Backbone.Events, {
+		//destroys controller, associated views and unbinds events
 		remove: function() {
+			this.view.remove();
 			this.stopListening();
 		}
 	});
 
-	var login_controller = new LoginController();
-	login_controller.initialize();
-
-	return login_controller;
-
+	return LoginController;
 });

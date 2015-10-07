@@ -10,10 +10,12 @@ define([
 			//initialize model
 			this.model = new UserModel();
 
-			//subscribe to initial events
+			//subscribe to events
 			this.listenTo(this.model, "change:loggedIn", this.onLoggedInChange);
 
-			//subscribe to other events
+			this.setInitialLoggedInState();
+
+			//subscribe to more events
 			this.listenTo(this.model, "change:token", this.onTokenChange);
 			this.listenTo(LoginController, "controller.login.submitted", this.controllerHandler.login_controller.submitted);
 			this.listenTo(RegisterController, "controller.register.submitted", this.controllerHandler.register_controller.submitted);
@@ -73,8 +75,5 @@ define([
 		}
 	});
 
-	var user_controller = new UserController();
-	user_controller.initialize();
-
-	return user_controller;
+	return UserController;
 });

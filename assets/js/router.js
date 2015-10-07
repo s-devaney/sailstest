@@ -1,17 +1,22 @@
 define([
-	"jquery",
 	"underscore",
 	"backbone",
 	"controller/user"
-], function($, _, Backbone, UserController) {
+], function(_, Backbone, UserController) {
 	var AppRouter = Backbone.Router.extend({
 		routes: {
-			"*action": "route_changed"
+			"login": "handleRoute",
+			"register": "handleRoute",
+			"employee": "handleRoute",
+			"employee/:employee": "handleRoute"
 		},
 
 		initialize: function() {
 			console.log("initializing router");
+
+			//subscribe to events
 			this.listenTo(UserController, "controller.user.logged_in_change", this.handleLoggedInChange)
+
 			Backbone.history.start();
 		},
 
@@ -26,9 +31,8 @@ define([
 			}
 		},
 
-		route_changed: function(page) {
-			console.log("route changed, triggering event");
-			this.trigger("router.route_changed", page);
+		handleRoute: function(route) {
+			this.trigger("router.route_changed", route);
 		}
 	});
 
